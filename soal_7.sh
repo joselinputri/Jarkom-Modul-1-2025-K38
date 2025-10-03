@@ -18,6 +18,7 @@ apt-get install -y vsftpd
 
 
 # Pastikan vsftpd.conf ada baris:
+nano /etc/vsftpd.conf
 
 local_enable=YES
 write_enable=YES
