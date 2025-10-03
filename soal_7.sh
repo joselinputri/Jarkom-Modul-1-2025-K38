@@ -18,13 +18,14 @@ apt-get install -y vsftpd
 
 
 # Pastikan vsftpd.conf ada baris:
-# local_enable=YES
-# write_enable=YES
-# chroot_local_user=YES
-# allow_writeable_chroot=YES
-# user_sub_token=$USER
-# local_root=/home/$USER/shared
-# user_config_dir=/etc/vsftpd_user_conf
+
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+allow_writeable_chroot=YES
+user_sub_token=$USER
+local_root=/home/$USER/shared
+user_config_dir=/etc/vsftpd_user_conf
 
 service vsftpd restart
 
