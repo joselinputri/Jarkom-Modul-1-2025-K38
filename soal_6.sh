@@ -15,4 +15,7 @@ wget --no-check-certificate -O traffic.zip "https://drive.google.com/uc?export=d
 # - Langkah selanjutnya: ekstrak / analisis pcap
 
 #Filter paket dengan IP Manwe (192.230.1.3)
- "ip.addr == 192.230.1.3" 
+#Hanya paket dari Manwe:
+ip.src == 192.230.1.3
+#Hanya paket menuju Manwe:
+ip.dst == 192.230.1.3
