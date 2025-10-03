@@ -12,6 +12,11 @@ chmod 755 /home/ainur /home/ainur/shared
 mkdir -p /etc/vsftpd_user_conf
 echo "local_root=/home/ainur/shared" > /etc/vsftpd_user_conf/ainur
 
+#update 
+apt-get update
+apt-get install -y vsftpd
+
+
 # Pastikan vsftpd.conf ada baris:
 # local_enable=YES
 # write_enable=YES
