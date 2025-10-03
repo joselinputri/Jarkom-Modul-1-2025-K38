@@ -6,7 +6,8 @@ adduser ainur
 passwd ainur
 mkdir -p /home/ainur/shared
 chown ainur:ainur /home/ainur/shared
-chmod 755 /home/ainur /home/ainur/shared
+chmod 755 /home/ainur
+chmod 755 /home/ainur/shared
 
 # Konfigurasi vsftpd agar user diarahkan ke folder shared
 mkdir -p /etc/vsftpd_user_conf
