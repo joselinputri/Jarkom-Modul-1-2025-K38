@@ -16,6 +16,10 @@ echo "local_root=/home/ainur/shared" > /etc/vsftpd_user_conf/ainur
 apt-get update
 apt-get install -y vsftpd
 
+#install ftp
+apt-get update
+apt-get install -y ftp
+
 
 # Pastikan vsftpd.conf ada baris:
 nano /etc/vsftpd.conf
