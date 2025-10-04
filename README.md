@@ -20,7 +20,16 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 - **Eru** berperan sebagai **router utama**.  
 - Router terhubung ke **internet** melalui **NAT1**.  
 - Router juga terhubung ke **dua switch**.  
-- Masing-masing switch kemudian menghubungkan **dua client**.  
+- Masing-masing switch kemudian menghubungkan **dua client**.
+
+  #foto 
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
+## Soal 2 - Koneksi Router ke Internet
+Agar **router Eru** dapat terkoneksi ke internet melalui **NAT1**, interface `eth0` dikonfigurasi untuk mendapatkan IP secara dinamis (DHCP):
+
+```bash
+auto eth0
+iface eth0 inet dhcp
+
 
