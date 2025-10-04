@@ -296,6 +296,184 @@ Filter Wireshark:
 #### Sesi kontrol FTP (port 21) antara client dan server
 ``` tcp.port == 21 && ip.addr == 192.230.1.1 ```
 
+# Soal 10 
+
+**Konteks singkat:**  
+Melkor (seorang client) marah karena tidak diberi akses, lalu mencoba menyerang router **Eru** dengan mengirimkan banyak request ICMP (ping flood) untuk melihat pengaruhnya terhadap kinerja Eru. 
+---
+
+## Cara menjalankan (di node **Melkor**)
+
+TARGET="192.230.1.1"
+
+#### 1) Baseline: 10 ping normal
+``` ping -c 10 192.230.1.1 | tee /tmp/baseline_ping.txt
+```
+
+#### 2) ICMP Flood / Ping attack: 100 ping (normal count)
+``` ping -c 100 192.230.1.1 | tee /tmp/attack_ping.txt ```
+
+
+Ambil ringkasan
+##### Paket & packet loss
+```grep 'packets transmitted' /tmp/attack_ping.txt ```
+
+##### Avg RTT
+``` awk -F'/' '/rtt/ {print "attack avg RTT = "$5" ms"}' /tmp/attack_ping.txt ```
+
+
+# 11. Persiapan Telnet Server (Melkor)
+
+Update repository dan install Telnet daemon:
+```bash
+apt update
+apt install -y inetutils-telnetd
+
+Cek file binari Telnet:
+
+ls -l /usr/sbin/in.telnetd
+Lihat konfigurasi Telnet di xinetd:
+
+
+cat /etc/xinetd.d/telnet
+Restart service xinetd agar konfigurasi baru aktif:
+
+
+service xinetd restart
+``` 
+
+#### Cek apakah port 23 Telnet sudah listening:
+```
+ss -tlnp | grep :23
+cp -n /etc/inetd.conf /etc/inetd.conf.bak
+grep -n "telnet" /etc/inetd.conf || true
+```
+
+#### Ubah semua referensi in.telnetd menjadi telnetd (safe):
+``` sed -i.bak 's#/usr/sbin/in.telnetd#/usr/sbin/telnetd#g' /etc/inetd.conf ```
+grep -n "telnet" /etc/inetd.conf
+
+#### Restart service inetd agar konfigurasi baru diterapkan:
+``` pid=$(pidof inetd)
+kill -HUP $pid
+```
+#### Cek kembali apakah Telnet sudah listening di port 23:
+``` ss -tlnp | grep :23 ```
+
+#### Uji Koneksi Telnet (Eru → Melkor)
+Dari node Eru, tes koneksi ke Telnet server Melkor:
+``` telnet 192.230.1.2 ```
+Jika berhasil, kamu akan masuk ke shell Telnet Melkor.
+
+
+# Soal 12 — Pemindaian Port Sederhana (Eru → Melkor)
+
+**Skenario singkat**  
+Eru mencurigai Melkor menjalankan layanan terlarang di node-nya. Tugas: dari node **Eru**, lakukan pemindaian port sederhana menggunakan **netcat (nc)** untuk memeriksa port:
+
+- **21 (FTP)** — harus **terbuka**
+- **80 (HTTP)** — harus **terbuka**
+- **666 (rahasia)** — harus **tertutup**
+
+> IP target Melkor: `192.230.1.2`
+
+---
+
+## 1. Persiapan di node Melkor (JB — job/daemon start)
+Pastikan layanan HTTP dan FTP berjalan di node Melkor (jalankan di Melkor):
+
+```bash
+# Start services sekarang
+service apache2 start
+service vsftpd start
+
+# Aktifkan service pada boot
+update-rc.d apache2 defaults
+update-rc.d vsftpd defaults
+
+# (Opsional) jalankan lagi untuk memastikan
+service apache2 start
+service vsftpd start
+```
+
+#### 2. Install Netcat di node Eru
+Jika netcat belum terpasang di Eru, install salah satu varian:
+``` apt update && apt install -y netcat-openbsd```
+
+
+### 3.Pemindaian Port (dari Eru ke Melkor)
+Gunakan opsi -v (verbose), -z (zero-I/O, port scan), dan -w 2 (timeout 2 detik):
+
+#### Cek FTP (port 21)
+nc -vz -w 2 192.230.1.2 21
+
+#### Cek HTTP (port 80)
+nc -vz -w 2 192.230.1.2 80
+
+#### Cek port rahasia (port 666)
+nc -vz -w 2 192.230.1.2 666
+
+
+
+
+# Soal 13 — Amankan Koneksi Administratif dengan SSH (Varda → Eru)
+
+**Skenario singkat**  
+Setelah insiden penyadapan Telnet, semua koneksi administratif harus menggunakan **SSH**. Tugas: dari **node Varda** lakukan koneksi SSH ke **Eru**, tangkap sesi dengan Wireshark, dan analisis mengapa username/password tidak terlihat.
+
+Target (contoh): `Eru = 192.230.1.1`, `Varda` sebagai client.  
+User pada Eru: `windah` (atau sesuai soal).
+
+---
+
+## 1. Persiapan pada node Eru (install & enable SSH)
+
+Jalankan di node **Eru**:
+
+```bash
+apt update
+apt install -y openssh-server
+
+# set password (contoh user basudara / sesuaikan)
+passwd basudara
+
+# tampilkan sebagian konfigurasi sshd untuk verifikasi
+sed -n '1,200p' /etc/ssh/sshd_config | sed -n '1,200p'
+
+# aktifkan password authentication (jika soal meminta)
+sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+# enable & start ssh (baik systemd atau sysvinit)
+which systemctl >/dev/null 2>&1 && systemctl enable --now ssh || service ssh start
+
+# cek listener port 22
+ss -tlnp | grep ':22' || netstat -tlnp | grep ':22'
+```
+
+2. Hapus host key lama (jika sebelumnya tersambung / key mismatch)
+Jika muncul error host key changed dari client Varda, jalankan di Varda:
+``` ssh-keygen -f '/root/.ssh/known_hosts' -R '192.230.1.1' ```
+Lalu coba lagi koneksi SSH.
+
+3. Dari node Varda: lakukan koneksi SSH ke Eru
+```
+ssh windah@192.230.1.1 ```
+Masukkan password bila diminta (atau gunakan key-based auth sesuai pengaturan).
+
+4. Menangkap sesi SSH dengan Wireshark
+4.1 Mulai capture
+Di mesin tempat lalu lintas melewati (mis. Varda) buka Wireshark dan mulai capture pada interface yang relevan (mis. eth0).
+
+4.2 Terapkan filter layar (agar capture fokus ke sesi SSH)
+Gunakan filter Wireshark:
+
+tcp.port == 22 && (ip.addr == 192.230.1.1 || ip.addr == <IP_Varda>)
+atau lebih singkat:
+
+
+tcp.port == 22 && ip.addr == 192.230.1.1
+Jika SSH berjalan di port non-standar ganti 22 sesuai port.
+
 
 
 
