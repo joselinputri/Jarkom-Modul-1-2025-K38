@@ -55,10 +55,7 @@ iface eth2 inet static
     netmask 255.255.255.0
 ```
 
-### Konfigurasi NAT
-``
-iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
-``
+![Gambar 2](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/2.png)
 
 
 # Soal 3
@@ -86,22 +83,31 @@ iface eth0 inet static
 
 ### Client Switch 2 (Gateway: 192.230.1.2)
 #### Varda (192.230.1.5)
-``
+```
 auto eth0
 iface eth0 inet static
     address 192.230.1.5
     netmask 255.255.255.0
     gateway 192.230.1.2
-``
+```
 
 ### Ulmo (192.230.1.6)
-`` 
+```
 auto eth0
 iface eth0 inet static
     address 192.230.1.6
     netmask 255.255.255.0
     gateway 192.230.1.2
-``
+```
+
+![3.1](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/3.1.png)
+
+
+![3.2](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/3.2.png)
+
+
+![3.3](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/3.3.png)
+
 
 
 # Soal 4
@@ -117,8 +123,7 @@ iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
 echo -e "nameserver 8.8.8.8\nnameserver 1.1.1.1" > /etc/resolv.conf
 ```
 
-![no1](assets_image/no4.png)
-
+![4](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/4.png)
 
 
 # Soal 5 
@@ -158,6 +163,16 @@ ip.src == 192.230.1.3
 
 #### Hanya paket menuju Manwe
 ```ip.dst == 192.230.1.3```
+
+
+
+![no 6 vers 2](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/no%206%20vers%202.png)
+
+![66](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/66.png)
+
+
+![666](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/666.png)
+
 
 
 
@@ -252,9 +267,11 @@ bye
 EOF
 ```
 
-### Uji Koneksi Internet
-`` ping google.com
-``
+
+![mel 7 (gata loat nanti)](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/mel%207%20(gatau%20loat%20nanti).png)
+![eru no 7](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/eru%20no%207.png)
+
+
 
 # Soal 8 
 
@@ -305,6 +322,63 @@ Filter Wireshark:
 #### Sesi kontrol FTP (port 21) antara client dan server
 ``` tcp.port == 21 && ip.addr == 192.230.1.1 ```
 
+
+![8](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/8.png)
+
+
+# Soal 9 — FTP Download & User Access Control
+
+Eru ingin membagikan **"Kitab Penciptaan"** kepada Manwe. File akan didistribusikan via FTP server di Eru, dengan user `ainur` dibuat **read-only**. Monitoring dilakukan menggunakan Wireshark untuk melihat perintah FTP yang dijalankan.
+
+#### Unduh file ke node server Eru
+``` wget --no-check-certificate "https://drive.google.com/uc?export=download&id=11ua2KgBu3MnHEIjhBnzqqv2RMEiJsILY" -O kitab_penciptaan.zip ``
+
+#### 2. Konfigurasi vsftpd
+Edit konfigurasi utama vsftpd
+``` sudo nano /etc/vsftpd.conf ```
+
+Pastikan ada / ubah entri berikut
+``` write_enable=YES
+ user_config_dir=/etc/vsftpd_user_conf
+```
+
+#### Buat direktori konfigurasi per-user
+sudo mkdir /etc/vsftpd_user_conf
+
+#### Buat konfigurasi khusus untuk user 'ainur'
+sudo nano /etc/vsftpd_user_conf/ainur
+Isi file:
+``` # write_enable=NO
+# download_enable=YES
+```
+
+#### Restart service vsftpd agar konfigurasi berlaku
+``` sudo service vsftpd restart ```
+
+#### 3. Download & Upload File via FTP dari node Manwe
+``` ftp 192.230.1.1 ```
+#### Login dengan user 'ainur' (atau user lain)
+``` cd shared
+get kitab_penciptaan.zip
+put kitab_penciptaan.zip
+```
+#### Upload akan gagal karena write-disable
+
+#### 4. Monitoring dengan Wireshark
+```
+Jalankan Wireshark di node pengamat / Manwe
+Set display filter: ftp
+Ikuti aliran perintah FTP: Follow → TCP Stream
+```
+### Gambar 9 (filter)
+![filter no 9](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/filter%20no%209.png)
+
+### Gambar 9 (read only)
+![read only no 9](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/read%20only%20no%209.png)
+
+![eru cuaca.zip no 9](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/eru%20cuaca.zip%20no%209.png)
+
+
 # Soal 10 
 ---
 
@@ -326,6 +400,8 @@ Ambil ringkasan
 
 ##### Avg RTT
 ``` awk -F'/' '/rtt/ {print "attack avg RTT = "$5" ms"}' /tmp/attack_ping.txt ```
+
+![10](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/10.png)
 
 
 # 11. Persiapan Telnet Server (Melkor)
@@ -370,6 +446,16 @@ kill -HUP $pid
 Dari node Eru, tes koneksi ke Telnet server Melkor:
 ``` telnet 192.230.1.2 ```
 Jika berhasil, kamu akan masuk ke shell Telnet Melkor.
+
+
+![11.1](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/11.1.png)
+
+
+![112](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/112.png)
+
+
+![116](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/116.png)
+
 
 
 # Soal 12 — Pemindaian Port Sederhana (Eru → Melkor)
@@ -420,6 +506,10 @@ nc -vz -w 2 192.230.1.2 80
 nc -vz -w 2 192.230.1.2 666
 
 
+![12](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/12.png)
+
+
+![122](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/122.png)
 
 
 # Soal 13 — Amankan Koneksi Administratif dengan SSH (Varda → Eru)
@@ -481,6 +571,14 @@ tcp.port == 22 && ip.addr == 192.230.1.1
 Jika SSH berjalan di port non-standar ganti 22 sesuai port.
 ``` 
 
+
+![131](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/131.png)
+
+![132](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/132.png)
+
+![133](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/133.png)
+
+![1334](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/1334.png)
 
 
 
