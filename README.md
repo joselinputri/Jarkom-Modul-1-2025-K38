@@ -319,7 +319,7 @@ a. How many packets are recorded in the pcapng file?
 Format: int
 > 500358
 
-[cite_start]Jumlah paket berada di pojok kanan bawah (sebelah profile: default)[cite: 3].
+Jumlah paket berada di pojok kanan bawah (sebelah profile: default).
 
 ![14.1](assets_image/14.1.png)
 
@@ -327,16 +327,18 @@ b. What are the user that successfully logged in?
 Format: user:pass
 > nienna:y4v4nn4_k3m3nt4r1
 
-[cite_start]User dan password yang berhasil login diketahui menggunakan filter `http.response.code == 200 && !(http.file_data contains "Invalid credentials")`[cite: 4].
-[cite_start]Klik kanan pada paket -> follow > tcp streams[cite: 5].
+User dan password yang berhasil login diketahui menggunakan filter `http.response.code == 200 && !(http.file_data contains "Invalid credentials")`.
+Klik kanan pada paket -> follow > tcp streams.
 
 ![14.2.1](assets_image/14.2.1.png)
 ![14.2.2](assets_image/14.2.2.png)
 
 c. Dari gambar (b) juga didapatkan letak credentials
+
 ![14.3](assets_image/14.3.png)
 
 d. Dari gambar (b) juga didapatkan user-agent yang digunakan.
+
 ![14.4](assets_image/14.4.png)
 
 flag: KOMJAR25{Brut3_F0rc3_1QhYSvBsCGwS0vgWLe77pqRun}
