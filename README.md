@@ -12,7 +12,7 @@
 Praktikum ini membahas konfigurasi jaringan dasar menggunakan router, switch, dan client untuk koneksi antar node dan internet. Dilakukan analisis keamanan jaringan melalui sniffing, FTP, upload/download file, simulasi serangan (ping flood & brute force), serta perbandingan Telnet dan SSH. Selain itu, dianalisis serangan Melkor seperti pencurian data, malware, dan email spoofing menggunakan file capture untuk identifikasi serta pencegahan ancaman. 
 
 -------------------------------------------
-# Soal 1 - Konfigurasi Topologi Jaringan
+# Soal 1 
 
 Pada praktikum ini digunakan **GNS3 Web UI** dengan host IP `192.230.1.1`.  
 Dibuat sebuah project dengan topologi sebagai berikut:
@@ -26,7 +26,7 @@ Struktur topologi ini dapat dilihat pada gambar berikut:
 
 ----------
 
-# Soal 2 - Koneksi Router ke Internet
+# Soal 2 
 Agar **router Eru** dapat terkoneksi ke internet melalui **NAT1**, interface `eth0` dikonfigurasi untuk mendapatkan IP secara dinamis (DHCP):
 
 ```bash
@@ -473,6 +473,7 @@ atau lebih singkat:
 
 tcp.port == 22 && ip.addr == 192.230.1.1
 Jika SSH berjalan di port non-standar ganti 22 sesuai port.
+``` 
 
 
 
