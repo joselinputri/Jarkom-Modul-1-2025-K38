@@ -67,7 +67,7 @@ Semua client menggunakan IP statis dengan gateway router yang sesuai.
 ```
 auto eth0
 iface eth0 inet static
-    address 192.230.1.3
+    address 192.230.1.2
     netmask 255.255.255.0
     gateway 192.230.1.1
 ```
@@ -76,7 +76,7 @@ iface eth0 inet static
 ```
 auto eth0
 iface eth0 inet static
-    address 192.230.1.4
+    address 192.230.1.3
     netmask 255.255.255.0
     gateway 192.230.1.1
 ```
@@ -86,19 +86,21 @@ iface eth0 inet static
 ```
 auto eth0
 iface eth0 inet static
-    address 192.230.1.5
+    address 192.230.2.3
     netmask 255.255.255.0
-    gateway 192.230.1.2
+    gateway 192.230.2.1
 ```
 
 ### Ulmo (192.230.1.6)
 ```
 auto eth0
 iface eth0 inet static
-    address 192.230.1.6
+    address 192.230.2.3
     netmask 255.255.255.0
-    gateway 192.230.1.2
+    gateway 192.230.2.2
 ```
+![3](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/3.png)
+
 
 ![3.1](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/3.1.png)
 
