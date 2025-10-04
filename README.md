@@ -55,7 +55,7 @@ iface eth2 inet static
 iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
 ``
 
-
+# Soal 3
 #### Konfigurasi Client (IP Statis)
 Semua client menggunakan IP statis dengan gateway router yang sesuai.
 
