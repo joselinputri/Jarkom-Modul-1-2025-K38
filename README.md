@@ -640,7 +640,9 @@ b. What is the name of the suspicious file?
 > invest_20.dll
 
 ![20.2.1](assets_image/20.2.1png) 
+
 Karena diberikan file TLS Session Keys, maka langsung `Edit` → `Preferences` → `Protocols` → `TLS` untuk mendekripsi pesan tls. 
+
 ![20.2.2](assets_image/20.2.2.png) 
 Export object -> html. Ada file suspicious yaitu invest_20.
 
