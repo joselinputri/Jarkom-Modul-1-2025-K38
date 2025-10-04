@@ -297,9 +297,6 @@ Filter Wireshark:
 ``` tcp.port == 21 && ip.addr == 192.230.1.1 ```
 
 # Soal 10 
-
-**Konteks singkat:**  
-Melkor (seorang client) marah karena tidak diberi akses, lalu mencoba menyerang router **Eru** dengan mengirimkan banyak request ICMP (ping flood) untuk melihat pengaruhnya terhadap kinerja Eru. 
 ---
 
 ## Cara menjalankan (di node **Melkor**)
