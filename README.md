@@ -98,7 +98,7 @@ iface eth0 inet static
 ``
 
 
-# 4. Konfigurasi Otomatis Saat Startup
+# Soal 4
 Perintah yang ditambahkan pada file konfigurasi interface (up ...) untuk memastikan konfigurasi diterapkan setiap node dinyalakan.
 
 #### Router Eru (NAT)
@@ -112,7 +112,7 @@ echo -e "nameserver 8.8.8.8\nnameserver 1.1.1.1" > /etc/resolv.conf
 ```
 
 
-# 5. Pengujian Koneksi
+# Soal 5 
 Lakukan pengujian dari setiap client.
 
 ### Uji ping ke Gateway Switch 1
