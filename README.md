@@ -68,12 +68,13 @@ iface eth0 inet static
 ```
 
 #### Manwe (192.230.1.4)
+```
 auto eth0
 iface eth0 inet static
     address 192.230.1.4
     netmask 255.255.255.0
     gateway 192.230.1.1
-``
+```
 
 ### Client Switch 2 (Gateway: 192.230.1.2)
 #### Varda (192.230.1.5)
@@ -92,7 +93,7 @@ iface eth0 inet static
     address 192.230.1.6
     netmask 255.255.255.0
     gateway 192.230.1.2
-```
+``
 
 
 # 4. Konfigurasi Otomatis Saat Startup
@@ -101,7 +102,7 @@ Perintah yang ditambahkan pada file konfigurasi interface (up ...) untuk memasti
 ### Router Eru (NAT)
 ```
 iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
-``
+```
 
 ## Client (DNS)
 ```
@@ -113,11 +114,14 @@ echo -e "nameserver 8.8.8.8\nnameserver 1.1.1.1" > /etc/resolv.conf
 Lakukan pengujian dari setiap client.
 
 ### Uji ping ke Gateway Switch 1
-ping 192.230.1.1
+``ping 192.230.1.1
+``
 
 ### Uji ping ke Gateway Switch 2
-ping 192.230.1.2
+``ping 192.230.1.2
+``
 
 ### Uji Koneksi Internet
-ping google.com
+`` ping google.com
+``
 
