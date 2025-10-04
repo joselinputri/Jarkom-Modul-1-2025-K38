@@ -24,6 +24,8 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
 
+----------
+
 # Soal 2 - Koneksi Router ke Internet
 Agar **router Eru** dapat terkoneksi ke internet melalui **NAT1**, interface `eth0` dikonfigurasi untuk mendapatkan IP secara dinamis (DHCP):
 
@@ -244,6 +246,55 @@ EOF
 ### Uji Koneksi Internet
 `` ping google.com
 ``
+
+# Soal 8 
+
+**Tujuan:**  
+Ulmo, sebagai penjaga perairan, perlu mengirimkan data ramalan cuaca ke node **Eru** melalui FTP. Panduan ini berisi perintah bash lengkap dan instruksi Wireshark.
+
+---
+
+### Persiapan Node Ulmo
+```bash
+# Update paket & install FTP client
+apt update
+apt install -y vsftpd ftp
+```
+---
+### Download file ramalan cuaca
+```
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=11ra_yTV_adsPIXeIPMSt0vrxCBZu0r33' -O cuaca.zip
+```
+### Upload file ke FTP Server Eru
+``` ftp 192.230.1.1 ```
+
+#### Login dengan user ainur
+``` Name: ainur
+Password: <password_ainur>
+```
+
+#### Masuk direktori shared di server
+`` cd shared ``
+
+#### Upload file
+`` put cuaca.zip ``
+
+#### Keluar
+`` bye
+``
+### Analisis FTP dengan Wireshark
+Filter Wireshark:
+#### Menampilkan semua paket FTP
+``` ftp ```
+
+#### Hanya perintah/request FTP
+``` ftp.request ```
+
+#### Perintah tertentu, misal upload/STOR
+``` ftp.request.command == "STOR" ```
+
+#### Sesi kontrol FTP (port 21) antara client dan server
+``` tcp.port == 21 && ip.addr == 192.230.1.1 ```
 
 
 
