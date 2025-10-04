@@ -311,8 +311,6 @@ Filter Wireshark:
 
 
 
-### Walkthrough Jarkom Modul 1 ###
-
 ---
 
 ### Soal 14 ###
@@ -323,7 +321,7 @@ Format: int
 
 [cite_start]Jumlah paket berada di pojok kanan bawah (sebelah profile: default)[cite: 3].
 
-[cite_start] [cite: 2]
+![14.1](assets_image/14.1.png)
 
 b. What are the user that successfully logged in?
 Format: user:pass
@@ -332,14 +330,16 @@ Format: user:pass
 [cite_start]User dan password yang berhasil login diketahui menggunakan filter `http.response.code == 200 && !(http.file_data contains "Invalid credentials")`[cite: 4].
 [cite_start]Klik kanan pada paket -> follow > tcp streams[cite: 5].
 
-[cite_start] [cite: 5]
-[cite_start] [cite: 6]
+![14.2.1](assets_image/14.2.1.png)
+![14.2.2](assets_image/14.2.2.png)
 
-c. [cite_start]Dari gambar (b) juga didapatkan letak credentials[cite: 7].
+c. Dari gambar (b) juga didapatkan letak credentials
+![14.3](assets_image/14.3.png)
 
-d. [cite_start]Dari gambar (b) juga didapatkan user-agent yang digunakan[cite: 8].
+d. Dari gambar (b) juga didapatkan user-agent yang digunakan.
+![14.4](assets_image/14.4.png)
 
-[cite_start]flag: KOMJAR25{Brut3_F0rc3_1QhYSvBsCGwS0vgWLe77pqRun} [cite: 9]
+flag: KOMJAR25{Brut3_F0rc3_1QhYSvBsCGwS0vgWLe77pqRun}
 
 ---
 
@@ -349,15 +349,15 @@ a. What device does Mellor use?
 Format: string
 > Keyboard
 
-[cite_start]Gunakan filter `usb.bDescriptorType` untuk mencari device yang digunakan[cite: 10]. [cite_start]Cari sampai menemukan type 3 atau string[cite: 11].
-
-[cite_start] [cite: 11]
+[cite_start]Gunakan filter `usb.bDescriptorType` untuk mencari device yang digunakan[cite: 10]. Cari sampai menemukan type 3 atau string.
+![15.1](assets_image/15.1.png)
 
 b. What did Melkor write?
 Format: string
 > Plz_pr0v1de_y0ur_us3rn4me_4nd_p4ssw0rd
 
-Export semua file ke csv. [cite_start]Disini saya pakai file decoder dalam bentuk .py[cite: 13].
+Export semua file ke csv. Disini saya pakai file decoder dalam bentuk .py.
+![15.2.1](assets_image/15.2.1.png)
 
 ### Skrip Decoder HID ###
     import csv
@@ -469,13 +469,13 @@ Export semua file ke csv. [cite_start]Disini saya pakai file decoder dalam bentu
     
 Maka akan keluar seperti ini:
 
-[cite_start] [cite: 122]
+![15.2.2](assets_image/15.2.2.png)
 
-c. [cite_start]Translate text base-64 ke plain text menggunakan cyberchef[cite: 123].
+c. Translate text base-64 ke plain text menggunakan cyberchef.
 
-[cite_start] [cite: 123]
+![15.3](assets_image/15.3.png)
 
-[cite_start]flag: KOMJAR25{K3yb0ard_W4rr10r_TIG4zQ6iduIi3f35miycN4A8J} [cite: 124]
+flag: KOMJAR25{K3yb0ard_W4rr10r_TIG4zQ6iduIi3f35miycN4A8J} 
 
 ---
 
@@ -485,18 +485,33 @@ a. What is the FTP password?
 Format: string
 > ind@psg420.com:6r_6e#TfT1p
 
-[cite_start]Buka `Tools` -> `Credentials`[cite: 126]. [cite_start]Follow tcp streams maka akan ditemukan user dan pass[cite: 128].
+Buka `Tools` -> `Credentials`. ![16.1.1](assets_image/16.1.1.png)
+Follow tcp streams maka akan ditemukan user dan pass.
 
-[cite_start] [cite: 127]
-[cite_start] [cite: 128]
+![16.1.2](assets_image/16.1.2.png)
+
 
 b. How many malware files are there?
 Format: int
 > 5
 
-[cite_start]Filter menggunakan `frame contains “DOS mode”`[cite: 129]. [cite_start]Maka ada 5 file yang dicurigai mengandung malware[cite: 130].
+Filter menggunakan `frame contains “DOS mode”`.
 
-[cite_start] [cite: 129]
+![16.2.1](assets_image/16.2.1.png)
+![16.2.2](assets_image/16.2.2.png)
+
+Maka ada 5 file yang dicurigai mengandung malware[cite: 130].
+
+![16.2.3](assets_image/16.2.3.png)
+![16.2.4](assets_image/16.2.4.png)
+![16.2.5](assets_image/16.2.5.png)
+![16.2.6](assets_image/16.2.6.png)
+![16.2.7](assets_image/16.2.7.png)
+
+
+Untuk nomor c - g didapat dari follow > tcp streams dari semua file yang dicurigain > save as raw file > `sha256sum <.fileexe>`.
+
+![16.3](assets_image/16.3.png)
 
 c. What is the hash of the first file (q.exe)?
 > ca34b0926cdc3242bbfad1c4a0b42cc2750d90db9a272d92cfb6cb7034d2a3bd
@@ -513,11 +528,9 @@ f. What is the hash of the fourth file (r.exe)?
 g. What is the hash of the fifth file (t.exe)?
 > 10ce4b79180a2ddd924fdc95951d968191af2ee3b7dfc96dd6a5714dbeae613a
 
-[cite_start]Untuk nomor c - g didapat dari follow > tcp streams dari semua file yang dicurigain > save as raw file > `sha256sum <.fileexe>`[cite: 131].
 
-[cite_start] [cite: 131]
 
-[cite_start]flag: KOMJAR25{Y0u_4r3_4_g00d_4nalyz3r_wFywVgOGK7XjRLyeZ6XSdr5o2} [cite: 132]
+flag: KOMJAR25{Y0u_4r3_4_g00d_4nalyz3r_wFywVgOGK7XjRLyeZ6XSdr5o2} 
 
 ---
 
@@ -526,24 +539,31 @@ g. What is the hash of the fifth file (t.exe)?
 a. What is the name of the suspicious file?
 > Invoice&MSO-Request.doc
 
-`File` > `Export Objects` > `HTTP`. [cite_start]Maka akan ada 3 file[cite: 133]. [cite_start]Setelah ketiga file dicek di virustotal, file Invoice&MSO-Request.doc terindikasi mencurigakan[cite: 134].
+`File` > `Export Objects` > `HTTP`. Maka akan ada 3 file.
 
+![17.1.1](assets_image/17.1.1.png) 
+
+Setelah ketiga file dicek di virustotal, file Invoice&MSO-Request.doc terindikasi mencurigakan.
+
+![17.1.2](assets_image/17.1.2.png) 
 [cite_start] [cite: 133]
 [cite_start] [cite: 134]
 
 b. What is the name of the second suspicious file?
 > knr.exe
 
-[cite_start]File kedua yang mencurigakan adalah knr.exe[cite: 135].
+File kedua yang mencurigakan adalah knr.exe.
 
-[cite_start] [cite: 135]
+![17.2](assets_image/17.2.png) 
 
 c. What is the hash of the second suspicious file?
 > 749e161661290e8a2d190b1a66469744127bc25bf46e5d0c6f2e835f4b92db18
 
-[cite_start]Dari virustotal terdapat keterangan hash dari file knr.exe[cite: 136].
+Dari virustotal terdapat keterangan hash dari file knr.exe.
 
-[cite_start]flag: KOMJAR25{M4ster_4n4lyzer_PJ7yZZQBjcg29pO5E6woxOq6G} [cite: 137]
+![17.2](assets_image/17.2.png) 
+
+flag: KOMJAR25{M4ster_4n4lyzer_PJ7yZZQBjcg29pO5E6woxOq6G} [cite: 137]
 
 ---
 
@@ -552,29 +572,33 @@ c. What is the hash of the second suspicious file?
 a. How many suspicious files are there?
 > 2
 
-[cite_start]Saya menggunakan filter `frame contains “.exe”` untuk mengetahui executable file yang ada[cite: 138]. [cite_start]Terdapat 2 file smb terlihat mencurigakan karena namanya tidak biasa [cite: 139, 140][cite_start]. saya coba export dan lihat di virustotal dan terbukti[cite: 140, 141].
+Saya menggunakan filter `frame contains “.exe”` untuk mengetahui executable file yang ada. 
 
-[cite_start] [cite: 138]
-[cite_start] [cite: 140]
-[cite_start] [cite: 140]
+![18.1.1](assets_image/18.1.1.png) 
+
+Terdapat 2 file smb terlihat mencurigakan karena namanya tidak biasa. Kemudian saya coba export dan lihat di virustotal dan terbukti.
+
+![18.1.2](assets_image/18.1.2.png) 
+![18.1.3](assets_image/18.1.3.png) 
 
 b. What is the name of the first suspicious file?
-> [cite_start]d0p2nc6ka3f_fixhohlycj4ovqfcy_smchzo_ub83urjpphrwahjwhv_o5c0fvf6.exe [cite: 142]
+> d0p2nc6ka3f_fixhohlycj4ovqfcy_smchzo_ub83urjpphrwahjwhv_o5c0fvf6.exe 
 
 c. What is the name of the second suspicious file?
 > [cite_start]oiku9bu68cxqenfmcsos2aek6t07_guuisgxhllixv8dx2eemqddnhyh46l8n_di.exe [cite: 143]
 
 d. What is the hash of the first suspicious file?
-> [cite_start]59896ae5f3edcb999243c7bfdc0b17eb7fe28f3a66259d797386ea470c010040 [cite: 144]
+> 59896ae5f3edcb999243c7bfdc0b17eb7fe28f3a66259d797386ea470c010040 
 
-[cite_start] [cite: 144]
+![18.4](assets_image/18.4.png) 
+
 
 e. What is the hash of the second suspicious file?
 > [cite_start]cf9990bee6c378cbf56239b3cc38276eec348d82740f84e9d5c343751f82560 [cite: 145]
 
-[cite_start] [cite: 145]
+![18.5](assets_image/18.5.png) 
 
-[cite_start]flag: KOMJAR25{Y0u_4re_g0dl1ke_top4c7cdz2fB7P9n5b5rd2y96} [cite: 146]
+flag: KOMJAR25{Y0u_4re_g0dl1ke_top4c7cdz2fB7P9n5b5rd2y96} [cite: 146]
 
 ---
 
@@ -583,25 +607,23 @@ e. What is the hash of the second suspicious file?
 a. What is the string for the sender?
 > Your Life
 
-Gunakan filter `smtp.req.command == “MAIL”`. [cite_start]Ditemukan banyak email masuk yang mencurigakan[cite: 147]. Setelah follow tcp streams muncul threatening message. [cite_start]Your Life adalah string untuk pengirim[cite: 148].
+Gunakan filter `smtp.req.command == “MAIL”`. Ditemukan banyak email masuk yang mencurigakan. Setelah follow tcp streams muncul threatening message. Your Life adalah string untuk pengirim
 
-[cite_start] [cite: 148]
+![19.1](assets_image/19.1.png) 
 
 b. How much money is the sender asking for?
 > 1600$
 
-[cite_start]Pengirim meminta 1600$[cite: 149].
-
-[cite_start] [cite: 149]
+![19.2](assets_image/19.2.png) 
 
 c. What is the bitcoin wallet address?
 > 1CWHmuF8dHt7HBGx5RKKLgg9QA2GmE3UyL
 
-[cite_start]Alamat bitcoin wallet = 1CWHmuF8dHt7HBGx5RKKLgg9QA2GmE3UyL[cite: 150].
+Alamat bitcoin wallet = 1CWHmuF8dHt7HBGx5RKKLgg9QA2GmE3UyL.
 
-[cite_start] [cite: 150]
+![19.3](assets_image/19.3.png) 
 
-[cite_start]flag: KOMJAR25{Y0u_4re_J4rk0m_G0d_JQDdS87mZT7LpEZDN7hC8GdMz} [cite: 151]
+flag: KOMJAR25{Y0u_4re_J4rk0m_G0d_JQDdS87mZT7LpEZDN7hC8GdMz} 
 
 ---
 
@@ -610,29 +632,30 @@ c. What is the bitcoin wallet address?
 a. What encryption is used by the user?
 > TLSv1.2
 
-[cite_start]Dari salah satu application data terlihat user menggunakan enkripsi TLS 1.2[cite: 153].
+Dari salah satu application data terlihat user menggunakan enkripsi TLS 1.2.
 
-[cite_start] [cite: 152]
+![20.1](assets_image/20.1.png) 
 
 b. What is the name of the suspicious file?
 > invest_20.dll
 
-[cite_start]Karena diberikan file TLS Session Keys, maka langsung `Edit` → `Preferences` → `Protocols` → `TLS` untuk mendekripsi pesan tls[cite: 155]. [cite_start]Export object -> html[cite: 156]. [cite_start]Ada file suspicious yaitu invest_20[cite: 157].
+![20.2.1](assets_image/20.2.1png) 
+Karena diberikan file TLS Session Keys, maka langsung `Edit` → `Preferences` → `Protocols` → `TLS` untuk mendekripsi pesan tls. 
+![20.2.2](assets_image/20.2.2.png) 
+Export object -> html. Ada file suspicious yaitu invest_20.
 
-[cite_start] [cite: 154]
-[cite_start] [cite: 157]
+![20.2.3](assets_image/20.2.3.png) 
 
 c. What is the hash of that file?
 > 31cf42b2a7c5c558f44cfc67684cc344c17d4946d3a1e0b2cecb8eb58173cb2f
 
-[cite_start]Hash menggunakan `sha256sum`[cite: 159].
+Hash menggunakan `sha256sum`.
 
-[cite_start] [cite: 158]
+![20.3](assets_image/20.3.png) 
 
-[cite_start]flag: KOMJAR25{B3ware_0f_M4lw4re_Dvr6ndMp5h9lMEm3DBLQu8xBU} [cite: 160]
+flag: KOMJAR25{B3ware_0f_M4lw4re_Dvr6ndMp5h9lMEm3DBLQu8xBU} 
 
 ---
-
 
 
 
