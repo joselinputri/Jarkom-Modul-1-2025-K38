@@ -639,7 +639,7 @@ Dari salah satu application data terlihat user menggunakan enkripsi TLS 1.2.
 b. What is the name of the suspicious file?
 > invest_20.dll
 
-![20.2.1](assets_image/20.2.1png) 
+![20.2.1](assets_image/20.2.1.png) 
 
 Karena diberikan file TLS Session Keys, maka langsung `Edit` → `Preferences` → `Protocols` → `TLS` untuk mendekripsi pesan tls. 
 
