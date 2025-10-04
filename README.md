@@ -23,7 +23,7 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 - Masing-masing switch kemudian menghubungkan **dua client**.
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
-![no.1]assets_image/no 1.png
+![no1](assets_image/no1.png)
 
 
 ----------
@@ -56,6 +56,7 @@ iface eth2 inet static
 ``
 iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
 ``
+
 
 # Soal 3
 #### Konfigurasi Client (IP Statis)
@@ -112,6 +113,9 @@ iptables -t nat -A POSTROUTING -s 192.230.1.0/24 -o eth0 -j MASQUERADE
 ```
 echo -e "nameserver 8.8.8.8\nnameserver 1.1.1.1" > /etc/resolv.conf
 ```
+
+![no1](assets_image/no4.png)
+
 
 
 # Soal 5 
