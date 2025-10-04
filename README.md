@@ -23,6 +23,8 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 - Masing-masing switch kemudian menghubungkan **dua client**.
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
+![no.1]assets_image/no 1.png
+
 
 ----------
 
