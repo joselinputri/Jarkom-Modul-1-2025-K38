@@ -351,7 +351,7 @@ a. What device does Mellor use?
 Format: string
 > Keyboard
 
-[cite_start]Gunakan filter `usb.bDescriptorType` untuk mencari device yang digunakan[cite: 10]. Cari sampai menemukan type 3 atau string.
+Gunakan filter `usb.bDescriptorType` untuk mencari device yang digunakan. Cari sampai menemukan type 3 atau string.
 ![15.1](assets_image/15.1.png)
 
 b. What did Melkor write?
@@ -548,8 +548,6 @@ a. What is the name of the suspicious file?
 Setelah ketiga file dicek di virustotal, file Invoice&MSO-Request.doc terindikasi mencurigakan.
 
 ![17.1.2](assets_image/17.1.2.png) 
-[cite_start] [cite: 133]
-[cite_start] [cite: 134]
 
 b. What is the name of the second suspicious file?
 > knr.exe
@@ -587,7 +585,7 @@ b. What is the name of the first suspicious file?
 > d0p2nc6ka3f_fixhohlycj4ovqfcy_smchzo_ub83urjpphrwahjwhv_o5c0fvf6.exe 
 
 c. What is the name of the second suspicious file?
-> [cite_start]oiku9bu68cxqenfmcsos2aek6t07_guuisgxhllixv8dx2eemqddnhyh46l8n_di.exe [cite: 143]
+> oiku9bu68cxqenfmcsos2aek6t07_guuisgxhllixv8dx2eemqddnhyh46l8n_di.exe
 
 d. What is the hash of the first suspicious file?
 > 59896ae5f3edcb999243c7bfdc0b17eb7fe28f3a66259d797386ea470c010040 
@@ -596,7 +594,7 @@ d. What is the hash of the first suspicious file?
 
 
 e. What is the hash of the second suspicious file?
-> [cite_start]cf9990bee6c378cbf56239b3cc38276eec348d82740f84e9d5c343751f82560 [cite: 145]
+> cf9990bee6c378cbf56239b3cc38276eec348d82740f84e9d5c343751f82560
 
 ![18.5](assets_image/18.5.png) 
 
