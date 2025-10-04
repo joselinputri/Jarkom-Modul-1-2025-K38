@@ -23,7 +23,8 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 - Masing-masing switch kemudian menghubungkan **dua client**.
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
-![Topologi Soal 1](assets_image/no1.png)
+![Gambar no 1](https://github.com/joselinputri/Jarkom-Modul-1-2025-K38/raw/main/assets_image/no%201.png)
+
 
 
 
