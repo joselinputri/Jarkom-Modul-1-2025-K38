@@ -23,7 +23,9 @@ Dibuat sebuah project dengan topologi sebagai berikut:
 - Masing-masing switch kemudian menghubungkan **dua client**.
 
 Struktur topologi ini dapat dilihat pada gambar berikut:  
-![no1](assets_image/no1.png)
+![Topologi Soal 1](assets_image/no1.png)
+
+
 
 
 ----------
